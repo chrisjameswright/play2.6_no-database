@@ -1,0 +1,20 @@
+@import helper._
+
+@(tasks: List[Task],taskForm: Form[Task])(implicit messages: Messages)
+
+@main("My Todo list") {
+  <h1>My Todo list</h1>
+
+  <h2>You have @tasks.size things to do:</h2>
+  <ul>
+    @tasks.map{task =>
+      <li>@task.label</li>
+    }
+  </ul>
+
+  <h2>Add a new todo:</h2>
+  @form(action = routes.HomeController.add()) {
+    @inputText(taskForm("label"), '_label -> "Description")
+    <button type="submit">Add</button>
+  }
+}
